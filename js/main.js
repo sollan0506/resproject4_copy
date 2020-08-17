@@ -10,18 +10,18 @@ $(function(){
     event.preventDefault();
   });
   
-  // 화면 크기가 변경될 때
-  $(window).resize(function() {
-    // gnb가 펼쳐져 있는 상태라면
-    if(gnb.hasClass('toggle')){
+  
+  $(window).resize(function() {     // 화면 크기가 변경될 때
+    
+    if(gnb.hasClass('toggle')){        // gnb가 펼쳐져 있는 상태라면
       gnb.hide();                         //gnb 숨기기
       gnb.removeClass('toggle');    //접힌 상태 만들기
     }
-    // 화면 사이즈가 767이하이고 접혀져 있는 상태라면
+    // 화면 사이즈가 767이하이고 gnb가 접혀져 있는 상태라면
     if(window.matchMedia('(max-width: 767px)').matches && !gnb.hasClass('toggle')){
-      gnb.hide(); //gnb를 숨겨서 toggle 버튼만 보이게 함
-    } else { //767이상이거나 펼쳐져 있는 상태라면
-      gnb.show(); //gnb 보여주기
+      gnb.hide();                         //gnb를 숨겨서 toggle 버튼만 보이게 함
+    } else {                                //화면 사이즈가 767이상이거나, gnb가 펼쳐져 있는 상태라면
+      gnb.show();                        //gnb 보여주기
     }
   });
 
@@ -39,7 +39,6 @@ $(function(){
   // 상단 네비게이션 설정
   $(window).scroll(function(){
     var scrollPos = $(window).scrollTop();
-    // console.log(scrollPos);
 
     if(scrollPos>20){
       $('#navi').addClass('fixed');
@@ -55,8 +54,7 @@ $(function(){
     }
 
     // scrollSpy
-    var navHeight = $('#navi').height();
-    var introHeight = $('#intro').height() - navHeight;
+    var introHeight = $('#intro').height() - $('#navi').height();
     var aboutEnd = introHeight + $('#about').height();
     var servicesEnd = aboutEnd + $('#services').height();
     var portfolioEnd = servicesEnd + $('#portfolio').height();
@@ -100,19 +98,19 @@ $(function(){
 
   // 부드러운 이동 함수 만들기
   function scrollMove(elWrap, navHeight){
-    var offset = elWrap.offset().top; //위로부터 얼만큼 떨어져 있는지
-    var totalScroll = offset - navHeight; //navi의 높이만큼 빼기
+    var offset = elWrap.offset().top;           //위로부터 얼만큼 떨어져 있는지
+    var totalScroll = offset - navHeight;      //navi의 높이만큼 빼기
     $('html, body').animate({scrollTop: totalScroll}, 800);
   }
 
 
   // scrollspy
-  scrollspy('#intro');
+  scrollspy('#intro');                       //초기설정
   function scrollspy(el){
-    $('.gnb li a').css('color','#fff'); //초기화
-    $('.gnb li').removeClass('active'); //초기화
+    $('.gnb li a').css('color','#fff');       //초기화
+    $('.gnb li').removeClass('active');   //초기화
 
-    $(".gnb li a[href=" + el + "]").css('color', "#f00");
+    $(".gnb li a[href=" + el + "]").css('color', "#f00");   // Home을 빨간색으로 표시
     $(".gnb li a[href=" + el + "]").parent().addClass('active');
   }
 
@@ -133,13 +131,9 @@ $(function(){
 
     if(indexNext === 1) {   
       // 첫번째 슬라이드 보이게 하기
-      $('.slides').find('.slide-item:nth-child(1)').animate({
-        'left': 0
-      }, 400); //가운데 보여지는 부분으로 이동
+      $('.slides').find('.slide-item:nth-child(1)').animate({ 'left': 0 }, 400); //가운데 보여지는 부분으로 이동
       $('.slides').find('.slide-item:nth-child(2)').css('left', $('.slides').width()); //다음 슬라이드
-      $('.slides').find('.slide-item:nth-child(3)').animate({
-        'left': -$('.slides').width()
-      }, 400); //이전 슬라이드
+      $('.slides').find('.slide-item:nth-child(3)').animate({ 'left': -$('.slides').width() }, 400); //이전 슬라이드
 
       // pager 셋팅
       $('.indicator').removeClass('active');
@@ -149,12 +143,8 @@ $(function(){
 
     } else if(indexNext === 2){
       // 두번째 슬라이드 보이게 하기
-      $('.slides').find('.slide-item:nth-child(1)').animate({
-        'left': -$('.slides').width()
-      }, 400); //이전 슬라이드
-      $('.slides').find('.slide-item:nth-child(2)').animate({
-        'left': 0
-      }, 400); //가운데 보여지는 부분으로 이동
+      $('.slides').find('.slide-item:nth-child(1)').animate({ 'left': -$('.slides').width() }, 400); //이전 슬라이드
+      $('.slides').find('.slide-item:nth-child(2)').animate({ 'left': 0 }, 400); //가운데 보여지는 부분으로 이동
       $('.slides').find('.slide-item:nth-child(3)').css('left', $('.slides').width()); //다음 슬라이드
       
       // pager 셋팅
@@ -166,12 +156,8 @@ $(function(){
     } else if(indexNext === 3){
       // 세번째 슬라이드 보이게 하기
       $('.slides').find('.slide-item:nth-child(1)').css('left', $('.slides').width()); //다음 슬라이드
-      $('.slides').find('.slide-item:nth-child(2)').animate({
-        'left': -$('.slides').width()
-      }, 400); //이전 슬라이드
-      $('.slides').find('.slide-item:nth-child(3)').animate({
-        'left': 0
-      }, 400); //가운데 보여지는 부분으로 이동
+      $('.slides').find('.slide-item:nth-child(2)').animate({ 'left': -$('.slides').width() }, 400); //이전 슬라이드
+      $('.slides').find('.slide-item:nth-child(3)').animate({ 'left': 0 }, 400); //가운데 보여지는 부분으로 이동
 
       // pager 셋팅
       $('.indicator').removeClass('active');
@@ -185,12 +171,8 @@ $(function(){
   function moveSliderPrev(){
     if(indexPrev === 1) {
       // 첫번째 슬라이드 보이게 하기
-      $('.slides').find('.slide-item:nth-child(1)').animate({
-        'left': 0
-      }, 400); //가운데 보여지는 부분으로 이동
-      $('.slides').find('.slide-item:nth-child(2)').animate({
-        'left': $('.slides').width()
-      }, 400); //다음 슬라이드
+      $('.slides').find('.slide-item:nth-child(1)').animate({ 'left': 0 }, 400); //가운데 보여지는 부분으로 이동
+      $('.slides').find('.slide-item:nth-child(2)').animate({ 'left': $('.slides').width() }, 400); //다음 슬라이드
       $('.slides').find('.slide-item:nth-child(3)').css('left', -$('.slides').width()); //이전 슬라이드
 
       // pager 셋팅
@@ -203,12 +185,8 @@ $(function(){
     } else if(indexPrev === 2){
       // 두번째 슬라이드 보이게 하기
       $('.slides').find('.slide-item:nth-child(1)').css('left', -$('.slides').width()); //이전 슬라이드
-      $('.slides').find('.slide-item:nth-child(2)').animate({
-        'left': 0
-      }, 400); //가운데 보여지는 부분으로 이동
-      $('.slides').find('.slide-item:nth-child(3)').animate({
-        'left': $('.slides').width()
-      }, 400); //다음 슬라이드
+      $('.slides').find('.slide-item:nth-child(2)').animate({ 'left': 0 }, 400); //가운데 보여지는 부분으로 이동
+      $('.slides').find('.slide-item:nth-child(3)').animate({ 'left': $('.slides').width() }, 400); //다음 슬라이드
 
       // pager 셋팅
       $('.indicator').removeClass('active');
@@ -218,14 +196,10 @@ $(function(){
 
     } else if(indexPrev === 3){
       // 세번째 슬라이드 보이게 하기
-      $('.slides').find('.slide-item:nth-child(1)').animate({
-        'left': $('.slides').width()
-      }, 400); //다음 슬라이드
+      $('.slides').find('.slide-item:nth-child(1)').animate({ 'left': $('.slides').width() }, 400); //다음 슬라이드
       $('.slides').find('.slide-item:nth-child(2)').css('left', -$('.slides').width()); //이전 슬라이드
       $('.slides').find('.slide-item:nth-child(3)').css('left', -$('.slides').width()); //먼저 3번 슬라이드를 이전 슬라이드 위치에 붙여놓음
-      $('.slides').find('.slide-item:nth-child(3)').animate({
-        'left': 0
-      }, 400); //가운데 보여지는 부분으로 이동
+      $('.slides').find('.slide-item:nth-child(3)').animate({ 'left': 0 }, 400); //가운데 보여지는 부분으로 이동
 
       // pager 셋팅
       $('.indicator').removeClass('active');
@@ -260,33 +234,21 @@ $(function(){
 
     if(index === 1) {   
       // 첫번째 슬라이드 보이게 하기
-      maximSlider.find('li:nth-child(1)').animate({
-        'left': 0
-      }, 400); //가운데 보여지는 부분으로 이동
+      maximSlider.find('li:nth-child(1)').animate({ 'left': 0 }, 400); //가운데 보여지는 부분으로 이동
       maximSlider.find('li:nth-child(2)').css('left', maximSlider.width()); //다음 슬라이드
-      maximSlider.find('li:nth-child(3)').animate({
-        'left': -maximSlider.width()
-      }, 400); //이전 슬라이드
+      maximSlider.find('li:nth-child(3)').animate({ 'left': -maximSlider.width() }, 400); //이전 슬라이드
 
     } else if(index === 2){
       // 두번째 슬라이드 보이게 하기
-      maximSlider.find('li:nth-child(1)').animate({
-        'left': -maximSlider.width()
-      }, 400); //이전 슬라이드
-      maximSlider.find('li:nth-child(2)').animate({
-        'left': 0
-      }, 400); //가운데 보여지는 부분으로 이동
+      maximSlider.find('li:nth-child(1)').animate({ 'left': -maximSlider.width() }, 400); //이전 슬라이드
+      maximSlider.find('li:nth-child(2)').animate({ 'left': 0 }, 400); //가운데 보여지는 부분으로 이동
       maximSlider.find('li:nth-child(3)').css('left', maximSlider.width()); //다음 슬라이드
 
     } else if(index === 3){
       // 세번째 슬라이드 보이게 하기
       maximSlider.find('li:nth-child(1)').css('left', maximSlider.width()); //다음 슬라이드
-      maximSlider.find('li:nth-child(2)').animate({
-        'left': -maximSlider.width()
-      }, 400); //이전 슬라이드
-      maximSlider.find('li:nth-child(3)').animate({
-        'left': 0
-      }, 400); //가운데 보여지는 부분으로 이동
+      maximSlider.find('li:nth-child(2)').animate({ 'left': -maximSlider.width() }, 400); //이전 슬라이드
+      maximSlider.find('li:nth-child(3)').animate({ 'left': 0 }, 400); //가운데 보여지는 부분으로 이동
 
       index = 0;
     }
@@ -333,9 +295,6 @@ $(function(){
 
     event.preventDefault();
   });
-
-
-  // Gallery Setting
   
 
   // portfolio caption hover
