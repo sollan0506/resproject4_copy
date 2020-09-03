@@ -723,12 +723,13 @@ body {
   margin-bottom: 21px;
 }
 /* form Start */
-#contact .contact-touch .form-group{
+/* #contact .contact-touch .form-group{
   position: relative;
-}
+} */
 #contact .contact-touch .input-top{
   width: 33.3%;
   float: left;
+  position: relative;
   margin-bottom: 21px;
 }
 #contact .contact-touch input {
